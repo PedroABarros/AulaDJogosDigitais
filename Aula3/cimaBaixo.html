@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bola Loop Infinito</title>
+</head>
+<body>
+  <canvas id="meuCanvas" width="500" height="500" style="border:1px solid black;"></canvas>
+  <script>
+    var canvas = document.getElementById('meuCanvas');
+    var context = canvas.getContext('2d');
+    
+    var x = 20;
+    var y = 100;
+    var raio = 50;
+
+    // Momento inicial
+    var anterior = new Date().getTime();
+    
+    // Iniciando animação
+    requestAnimationFrame(mexerBola);
+    
+    function mexerBola() {
+      var agora = new Date().getTime();
+      var decorrido = agora - anterior;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      // desenha a bola
+      context.fillStyle = 'red';
+      context.strokeStyle = 'black';
+      context.lineWidth = 2;
+      context.beginPath();
+      context.arc(x, y, raio, 0, 2 * Math.PI);
+      context.fill();
+      context.stroke();
+
+      // velocidade em pixels por frame
+      var velocidade = 100; // pixels por segundo
+      x += (velocidade * decorrido) / 1000;
+
+      // se sair da tela, volta para a esquerda
+      if (x - raio > canvas.width) {
+        x = -raio; // recomeça fora da tela, na esquerda
+      }
+
+      anterior = agora;
+
+      requestAnimationFrame(mexerBola);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <canvas id="meuCanvas" width="500" height="500" style="background-color: aquamarine;" ></canvas>
+        <script>
+            var canvas = document.getElementById('meuCanvas');
+            var context = canvas.getContext('2d');
+
+            //carregar imagem
+            var imagem = new Image();
+            imagem.src = 'img/ovni.png';
+            imagem.onload = function(){
+                var x = 20; //comaçar na posição 20
+                //desenha as imagens
+                for(var i=1; i<=5; i++){
+                                    //variavel, x, y, largura, altura0
+                    context.drawImage(imagem,x,20,64,32);
+                    x += 70;
+                }
+
+                for(var i=1; i<=5; i++){
+                                    //variavel, x, y, largura, altura0
+                    context.drawImage(imagem,x,40,64,32);
+                    x += 70;
+                }
+            }
+
+
+
+
+
+        </script>
+</body>
+</html>

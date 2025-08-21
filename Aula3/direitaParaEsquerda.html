@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bola Direita Para Esquerda</title>
+</head>
+<body>
+  <canvas id="meuCanvas" width="500" height="500" style="border:1px solid black;"></canvas>
+  <script>
+    var canvas = document.getElementById('meuCanvas');
+    var context = canvas.getContext('2d');
+    
+    var raio = 20;
+    var x = 400;
+    var y = 100;
+
+    var anterior = new Date().getTime();
+    
+    requestAnimationFrame(mexerBola);
+    
+    function mexerBola() {
+      var agora = new Date().getTime();
+      var decorrido = agora - anterior;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      // desenha a bola
+      context.fillStyle = 'green';
+      context.strokeStyle = 'black';
+      context.lineWidth = 1;
+      context.beginPath();
+      context.arc(x, y, raio, 0, 2 * Math.PI);
+      context.fill();
+      context.stroke();
+
+      var velocidade = 100; // pixels por segundo
+      y += (velocidade * decorrido) / 1000; // movimento para esquerda
+
+      anterior = agora;
+
+    requestAnimationFrame(mexerBola);
+
+    }
+  </script>
+</body>
+</html>

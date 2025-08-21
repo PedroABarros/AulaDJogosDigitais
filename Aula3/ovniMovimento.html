@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ovni Loop Infinito</title>
+</head>
+<body>
+  <canvas id="meuCanvas" width="500" height="500" style="border:1px solid black;"></canvas>
+  <script>
+    var canvas = document.getElementById('meuCanvas');
+    var context = canvas.getContext('2d');
+
+    var x = 20;
+    var y = 100;
+    var largura = 64;
+    var altura = 32;
+
+    // criar a imagem **uma vez**
+    var imagem = new Image();
+    imagem.src = '../Aula2/img/ovni.png';
+
+    var anterior = new Date().getTime();
+
+    // iniciar animação quando a imagem estiver carregada
+    imagem.onload = function() {
+      requestAnimationFrame(mexerBola);
+    };
+
+    function mexerBola() {
+      var agora = new Date().getTime();
+      var decorrido = agora - anterior;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      // desenhar a imagem
+      context.drawImage(imagem, x, y, largura, altura);
+
+      // velocidade em pixels por segundo
+      var velocidade = 100;
+      x += (velocidade * decorrido) / 1000;
+
+      // loop infinito: se sair da tela, volta para a esquerda
+      if (x > canvas.width) {
+        x = -largura;
+      }
+
+      anterior = agora;
+      requestAnimationFrame(mexerBola);
+    }
+  </script>
+</body>
+</html>
