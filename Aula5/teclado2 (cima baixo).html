@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentando personagem com a classe JavaScript</title>
+    <script src="teclado.js"></script>
+</head>
+<body>
+    <canvas id="canvas_teclado_2" width="500" height="500" style="background-color:  aquamarine"></canvas>
+
+    <script>
+        var canvas = document.getElementById("canvas_teclado_2");
+        var ctx = canvas.getContext("2d");
+
+        // posição inicial do personagem
+        var posicaoX = 0;
+        var posicaoY = 100;
+
+        desenharPersonagem();
+
+        var teclado = new Teclado(document);
+
+        requestAnimationFrame(animar);
+
+        function animar() {
+            if (teclado.pressionada(SETA_ESQUERDA)) posicaoX -= 10;
+            if (teclado.pressionada(SETA_DIREITA)) posicaoX += 10;
+            if (teclado.pressionada(SETA_CIMA)) posicaoY -= 10;
+            if (teclado.pressionada(SETA_BAIXO)) posicaoY += 10;
+
+            desenharPersonagem();
+            requestAnimationFrame(animar);
+        }
+
+        function desenharPersonagem() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // limpa o caminho
+            ctx.fillRect(posicaoX, posicaoY, 20, 50);
+        }
+    </script>
+</body>
+</html>
